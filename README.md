@@ -1,4 +1,4 @@
-# obsidian-easy-navigation
+# obsidian-smooth-navigator
 
 This is a simple plugin that provides a suite of commands for cycling through open tabs/leaves/files and tab groups/splits. Its aim is to reduce friction by providing the means to bind keyboard shortcuts to common navigation actions.  
 
