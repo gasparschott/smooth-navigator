@@ -58,7 +58,7 @@ class SmoothNavigator extends obsidian.Plugin {
 			switch(true) {
 				case action === 'cycleSplitsBackward' || action === 'cycleSplitsForward':			target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
 				case action === 'cycleSplitsBackwardPlus' || action === 'cycleSplitsForwardPlus':	target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
-				case action === 'cycleFilesBackward':												target_leaf = getNextLeaf(active_tab_group'backward');							break;
+				case action === 'cycleFilesBackward':												target_leaf = getNextLeaf(active_tab_group,'backward');							break;
 				case action === 'cycleFilesForward':												target_leaf = getNextLeaf(active_tab_group,'forward');							break;
 				case action === 'focusFirstFileInTabGroup':											target_leaf = active_tab_group.children[0];										break;
 				case action === 'focusLastFileInTabGroup':											target_leaf = active_tab_group.children[active_tab_group.children.length - 1];	break;
