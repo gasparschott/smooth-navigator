@@ -64,6 +64,7 @@ class SmoothNavigator extends obsidian.Plugin {
 				case action === 'focusLastFileInTabGroup':											target_leaf = active_tab_group.children[active_tab_group.children.length - 1];	break;
 				case action === 'focusFirstFile':													target_leaf = getAllLeaves(tab_groups)[0];										break;
 				case action === 'focusLastFile':													target_leaf = getAllLeaves(tab_groups)[getAllLeaves(tab_groups).length - 1];	break;
+				case action === 'focusMostRecentLeaf':												target_leaf = workspace.getMostRecentLeaf();									break;
 				case action === 'focusFileExplorer':												this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
 			}
 			workspace.setActiveLeaf(target_leaf,{focus:true});
@@ -119,6 +120,11 @@ class SmoothNavigator extends obsidian.Plugin {
 			id: 'smooth-nav-focus-last-file-in-tab-group',
 			name: 'Go to last file in active tab group',
 			callback: () => { focusTabs('focusLastFileInTabGroup') }
+		});
+		this.addCommand({
+			id: 'smooth-nav-focus-most-recent-leaf',
+			name: 'Go to most recent leaf',
+			callback: () => { focusTabs('focusMostRecentLeaf') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-file-explorer',

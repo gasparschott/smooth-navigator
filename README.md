@@ -20,6 +20,7 @@ AVAILABLE COMMANDS
 - Go to last file in workspace root   
 - Go to first file in active tab group  
 - Go to last file in active tab group  
+- Go to most recent leaf
 - Focus file explorer  
 
 ### Troubleshooting
