@@ -73,32 +73,32 @@ class SmoothNavigator extends obsidian.Plugin {
 		//// COMMANDS
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-forward',
-			name: 'Navigate forward through root tab groups only',
+			name: 'Go to next root tab group',
 			callback: () => { focusTabs('cycleSplitsForward') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-backward',
-			name: 'Navigate backward through root tab groups only',
+			name: 'Go to previous root tab group',
 			callback: () => { focusTabs('cycleSplitsBackward') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-forward-plus',
-			name: 'Navigate forward through root tab groups and sidebars',
+			name: 'Go to next tab group (root + sidebars)',
 			callback: () => { focusTabs('cycleSplitsForwardPlus') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-backward-plus',
-			name: 'Navigate backward through root tab groups and sidebars',
+			name: 'Go to previous tab group (root + sidebars)',
 			callback: () => { focusTabs('cycleSplitsBackwardPlus') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-files-forward',
-			name: 'Navigate forward through files in active tab group',
+			name: 'Go to next leaf in active tab group',
 			callback: () => { focusTabs('cycleFilesForward') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-files-backward',
-			name: 'Navigate backward through files in active tab group',
+			name: 'Go to previous leaf in active tab group',
 			callback: () => { focusTabs('cycleFilesBackward') }
 		});
 		this.addCommand({
@@ -128,7 +128,7 @@ class SmoothNavigator extends obsidian.Plugin {
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-file-explorer',
-			name: 'Focus file explorer',
+			name: 'Go to file explorer',
 			callback: () => { focusTabs('focusFileExplorer') }
 		});
 	} 
