@@ -73,22 +73,22 @@ class SmoothNavigator extends obsidian.Plugin {
 		//// COMMANDS
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-forward',
-			name: 'Go to next root tab group',
+			name: 'Go to next tab group (workspace root only)',
 			callback: () => { focusTabs('cycleSplitsForward') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-backward',
-			name: 'Go to previous root tab group',
+			name: 'Go to previous tab group (workspace root only)',
 			callback: () => { focusTabs('cycleSplitsBackward') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-forward-plus',
-			name: 'Go to next tab group (root + sidebars)',
+			name: 'Go to next tab group (workspace root + sidebars)',
 			callback: () => { focusTabs('cycleSplitsForwardPlus') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-cycle-splits-backward-plus',
-			name: 'Go to previous tab group (root + sidebars)',
+			name: 'Go to previous tab group (workspace root + sidebars)',
 			callback: () => { focusTabs('cycleSplitsBackwardPlus') }
 		});
 		this.addCommand({
@@ -103,22 +103,22 @@ class SmoothNavigator extends obsidian.Plugin {
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-first-file',
-			name: 'Go to first file in workspace root',
+			name: 'Go to first leaf in workspace root',
 			callback: () => { focusTabs('focusFirstFile') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-last-file',
-			name: 'Go to last file in workspace root',
+			name: 'Go to last leaf in workspace root',
 			callback: () => { focusTabs('focusLastFile') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-first-file-in-tab-group',
-			name: 'Go to first file in active tab group',
+			name: 'Go to first leaf in active tab group',
 			callback: () => { focusTabs('focusFirstFileInTabGroup') }
 		});
 		this.addCommand({
 			id: 'smooth-nav-focus-last-file-in-tab-group',
-			name: 'Go to last file in active tab group',
+			name: 'Go to last leaf in active tab group',
 			callback: () => { focusTabs('focusLastFileInTabGroup') }
 		});
 		this.addCommand({

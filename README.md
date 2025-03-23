@@ -10,16 +10,16 @@ The plugin repeats some command functions already available in Obsidian, but the
 
 AVAILABLE COMMANDS
 
-- Go to next root tab group
-- Go to previous root tab group
-- Go to next tab group (root + sidebars)
-- Go to previous tab group (root + sidebars)
+- Go to next tab group (workspace root only)
+- Go to previous tab group (workspace root only)
+- Go to next tab group (workspace root + sidebars)
+- Go to previous tab group (workspace root + sidebars)
 - Go to next leaf in active tab group
 - Go to previous leaf in active tab group
-- Go to first file in workspace root
-- Go to last file in workspace root
-- Go to first file in active tab group
-- Go to last file in active tab group
+- Go to first leaf in workspace root
+- Go to last leaf in workspace root
+- Go to first leaf in active tab group
+- Go to last leaf in active tab group
 - Go to most recent leaf
 - Go to file explorer
 
