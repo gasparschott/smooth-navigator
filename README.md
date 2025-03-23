@@ -10,18 +10,18 @@ The plugin repeats some command functions already available in Obsidian, but the
 
 AVAILABLE COMMANDS
 
-- Navigate forward through root tab groups only  
-- Navigate backward through root tab groups only  
-- Navigate forward through root tab groups and sidebars  
-- Navigate backward through root tab groups and sidebars  
-- Navigate forward through files in active tab group  
-- Navigate backward through files in active tab group  
-- Go to first file in workspace root   
-- Go to last file in workspace root   
-- Go to first file in active tab group  
-- Go to last file in active tab group  
+- Go to next root tab group
+- Go to previous root tab group
+- Go to next tab group (root + sidebars)
+- Go to previous tab group (root + sidebars)
+- Go to next leaf in active tab group
+- Go to previous leaf in active tab group
+- Go to first file in workspace root
+- Go to last file in workspace root
+- Go to first file in active tab group
+- Go to last file in active tab group
 - Go to most recent leaf
-- Focus file explorer  
+- Go to file explorer
 
 ### Troubleshooting
 • Not compatible with Outliner.MD plugin in its current form (0.1.5) as it seems to highjack tab focus when an outliner file is open. This prevents changing the focus of tabs or tab splits via the keyboard commands.
