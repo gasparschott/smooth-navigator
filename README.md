@@ -1,5 +1,7 @@
 # obsidian-smooth-navigator
 
+![GitHub manifest version](https://img.shields.io/github/manifest-json/v/gasparschott/obsidian-smooth-navigator) ![GitHub all releases](https://img.shields.io/github/downloads/gasparschott/obsidian-smooth-navigator/total)
+
 This is a simple plugin that provides a suite of commands for cycling through open tabs/leaves/files and tab groups/splits. Its aim is to reduce friction by providing the means to bind keyboard shortcuts to common navigation actions.  
 
 Note that this plugin is about navigating through already open leaves; it is *not* about searching for and opening files. It assumes that all the files you want to work with are already open in your workspace.
