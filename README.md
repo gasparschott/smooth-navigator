@@ -1,4 +1,4 @@
-# obsidian-smooth-navigator
+# smooth-navigator
 
 ![GitHub manifest version](https://img.shields.io/github/manifest-json/v/gasparschott/smooth-navigator)
   ![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/gasparschott/smooth-navigator/total)  

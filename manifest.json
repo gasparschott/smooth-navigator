@@ -1,7 +1,7 @@
 {
 	"id": "smooth-navigator",
 	"name": "Smooth Navigator",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"minAppVersion": "0.15.0",
 	"description": "Smoothly cycle through open files and splits via the keyboard.",
 	"author": "Michael Schrauzer",

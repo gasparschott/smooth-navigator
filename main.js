@@ -53,83 +53,84 @@ class SmoothNavigator extends obsidian.Plugin {
 			return next_leaf;
 		}
 		// FOCUS TABS
-		const focusTabs = (action) => {
+		const goTo = (action) => {
 			let tab_groups = getAllTabGroups(null,action), active_tab_group = getActiveTabGroup(), target_leaf;
+
+console.log(workspace.getLastOpenFiles());
+console.log(workspace.getMostRecentLeaf());
+console.log(getActiveLeaf(workspace.activeTabGroup))
+//case action === 'goToMostRecentLeaf' && workspace.getMostRecentLeaf() === getActiveLeaf(workspace.activeTabGroup): 		target_leaf = getActiveLeaf(workspace.activeTabGroup);	break;
+
 			switch(true) {
 				case action === 'cycleSplitsBackward' || action === 'cycleSplitsForward':			target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
 				case action === 'cycleSplitsBackwardPlus' || action === 'cycleSplitsForwardPlus':	target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
-				case action === 'cycleFilesBackward':												target_leaf = getNextLeaf(active_tab_group,'backward');							break;
-				case action === 'cycleFilesForward':												target_leaf = getNextLeaf(active_tab_group,'forward');							break;
-				case action === 'focusFirstFileInTabGroup':											target_leaf = active_tab_group.children[0];										break;
-				case action === 'focusLastFileInTabGroup':											target_leaf = active_tab_group.children[active_tab_group.children.length - 1];	break;
-				case action === 'focusFirstFile':													target_leaf = getAllLeaves(tab_groups)[0];										break;
-				case action === 'focusLastFile':													target_leaf = getAllLeaves(tab_groups)[getAllLeaves(tab_groups).length - 1];	break;
-				case action === 'focusMostRecentLeaf':												target_leaf = workspace.getMostRecentLeaf();									break;
-				case action === 'focusFileExplorer':												this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
+				case action === 'goToPreviousLeaf':													target_leaf = getNextLeaf(active_tab_group,'backward');							break;
+				case action === 'goToNextLeaf':														target_leaf = getNextLeaf(active_tab_group,'forward');							break;
+				case action === 'goToFirstTabGroupLeaf':											target_leaf = active_tab_group.children[0];										break;
+				case action === 'goToLastTabGroupLeaf':												target_leaf = active_tab_group.children[active_tab_group.children.length - 1];	break;
+				case action === 'goToFirstRootLeaf':												target_leaf = getAllLeaves(tab_groups)[0];										break;
+				case action === 'goToLastRootLeaf':													target_leaf = getAllLeaves(tab_groups)[getAllLeaves(tab_groups).length - 1];	break;
+				case action === 'goToMostRecentLeaf':												target_leaf = workspace.getMostRecentLeaf();									break;
+				case action === 'goToFileExplorer':													this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
 			}
 			workspace.setActiveLeaf(target_leaf,{focus:true});
 			target_leaf.tabHeaderEl?.click();														// triggers "scrollintoview" behavior if Continuous-Mode plugin is installed and enabled.
 		};
 		//// COMMANDS
 		this.addCommand({
-			id: 'smooth-nav-cycle-splits-forward',
+			id: 'smooth-nav-go-to-next-workspace-tab-group',
 			name: 'Go to next tab group (workspace root only)',
-			callback: () => { focusTabs('cycleSplitsForward') }
+			callback: () => { goTo('cycleSplitsForward') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-cycle-splits-backward',
+			id: 'smooth-nav-go-to-previous-workspace-tab-group',
 			name: 'Go to previous tab group (workspace root only)',
-			callback: () => { focusTabs('cycleSplitsBackward') }
+			callback: () => { goTo('cycleSplitsBackward') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-cycle-splits-forward-plus',
+			id: 'smooth-nav-go-to-next-tab-group-plus',
 			name: 'Go to next tab group (workspace root + sidebars)',
-			callback: () => { focusTabs('cycleSplitsForwardPlus') }
+			callback: () => { goTo('cycleSplitsForwardPlus') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-cycle-splits-backward-plus',
+			id: 'smooth-nav-go-to-previous-tab-group-plus',
 			name: 'Go to previous tab group (workspace root + sidebars)',
-			callback: () => { focusTabs('cycleSplitsBackwardPlus') }
+			callback: () => { goTo('cycleSplitsBackwardPlus') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-cycle-files-forward',
+			id: 'smooth-nav-go-to-next-leaf',
 			name: 'Go to next leaf in active tab group',
-			callback: () => { focusTabs('cycleFilesForward') }
+			callback: () => { goTo('goToNextLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-cycle-files-backward',
+			id: 'smooth-nav-go-to-previous-leaf',
 			name: 'Go to previous leaf in active tab group',
-			callback: () => { focusTabs('cycleFilesBackward') }
+			callback: () => { goTo('goToPreviousLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-focus-first-file',
+			id: 'smooth-nav-go-to-first-root-leaf',
 			name: 'Go to first leaf in workspace root',
-			callback: () => { focusTabs('focusFirstFile') }
+			callback: () => { goTo('goToFirstRootLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-focus-last-file',
+			id: 'smooth-nav-go-to-last-root-leaf',
 			name: 'Go to last leaf in workspace root',
-			callback: () => { focusTabs('focusLastFile') }
+			callback: () => { goTo('goToLastRootLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-focus-first-file-in-tab-group',
+			id: 'smooth-nav-go-to-first-tab-group-leaf',
 			name: 'Go to first leaf in active tab group',
-			callback: () => { focusTabs('focusFirstFileInTabGroup') }
+			callback: () => { goTo('goToFirstTabGroupLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-focus-last-file-in-tab-group',
+			id: 'smooth-nav-go-to-last-tab-group-leaf',
 			name: 'Go to last leaf in active tab group',
-			callback: () => { focusTabs('focusLastFileInTabGroup') }
+			callback: () => { goTo('goToLastTabGroupLeaf') }
 		});
 		this.addCommand({
-			id: 'smooth-nav-focus-most-recent-leaf',
+			id: 'smooth-nav-go-to-most-recent-leaf',
 			name: 'Go to most recent leaf',
-			callback: () => { focusTabs('focusMostRecentLeaf') }
-		});
-		this.addCommand({
-			id: 'smooth-nav-focus-file-explorer',
-			name: 'Go to file explorer',
-			callback: () => { focusTabs('focusFileExplorer') }
+			callback: () => { goTo('goToMostRecentLeaf') }
 		});
 	} 
     // end onload
