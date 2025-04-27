@@ -55,12 +55,6 @@ class SmoothNavigator extends obsidian.Plugin {
 		// FOCUS TABS
 		const goTo = (action) => {
 			let tab_groups = getAllTabGroups(null,action), active_tab_group = getActiveTabGroup(), target_leaf;
-
-console.log(workspace.getLastOpenFiles());
-console.log(workspace.getMostRecentLeaf());
-console.log(getActiveLeaf(workspace.activeTabGroup))
-//case action === 'goToMostRecentLeaf' && workspace.getMostRecentLeaf() === getActiveLeaf(workspace.activeTabGroup): 		target_leaf = getActiveLeaf(workspace.activeTabGroup);	break;
-
 			switch(true) {
 				case action === 'cycleSplitsBackward' || action === 'cycleSplitsForward':			target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
 				case action === 'cycleSplitsBackwardPlus' || action === 'cycleSplitsForwardPlus':	target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
@@ -71,10 +65,12 @@ console.log(getActiveLeaf(workspace.activeTabGroup))
 				case action === 'goToFirstRootLeaf':												target_leaf = getAllLeaves(tab_groups)[0];										break;
 				case action === 'goToLastRootLeaf':													target_leaf = getAllLeaves(tab_groups)[getAllLeaves(tab_groups).length - 1];	break;
 				case action === 'goToMostRecentLeaf':												target_leaf = workspace.getMostRecentLeaf();									break;
-				case action === 'goToFileExplorer':													this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
+//				case action === 'goToFileExplorer':													this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
 			}
 			workspace.setActiveLeaf(target_leaf,{focus:true});
-			target_leaf.tabHeaderEl?.click();														// triggers "scrollintoview" behavior if Continuous-Mode plugin is installed and enabled.
+			if ( workspace.app.plugins.enabledPlugins.values().find( (value) => value === 'continuous-mode') ) {
+				target_leaf.tabHeaderEl?.click();														// triggers "scrollintoview" behavior if Continuous-Mode plugin is installed and enabled.
+			}
 		};
 		//// COMMANDS
 		this.addCommand({
