@@ -25,6 +25,8 @@ The plugin repeats some command functions already available in Obsidian, but the
 - Go to last leaf in active tab group  
 - Go to most recent leaf  
 
+You may also wish to set a shortcut for the native “Files: Reveal current file in navigation” command, which will open the File Explorer (if it is not already open) and select the current file.
+
 ### Troubleshooting
 • Not compatible with Outliner.MD plugin in its current form (0.1.5) as it seems to highjack tab focus when an outliner file is open. This prevents changing the focus of tabs or tab splits via the keyboard commands.  
 • This plugin works well with my “[Smooth Explorer](https://github.com/gasparschott/smooth-explorer/)” plugin, which allows you to use the arrow keys to navigate up and down the File Explorer, opening items as you go, but it is not required.
