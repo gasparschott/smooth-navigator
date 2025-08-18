@@ -11,20 +11,20 @@ Why not use the Quick Switcher or similar solutions to accomplish this? Searchin
 
 The plugin repeats some command functions already available in Obsidian, but they are included not only for completeness’ sake, but because in some cases the plugin adds convenience features not available in the native commands. For example, the “previous” and “next” commands cycle from the last item to the first and vice versa, so you don't have to switch shortcuts, and can jump from one “end” of the tab group to the other.
 
-AVAILABLE COMMANDS
+#### AVAILABLE COMMANDS
 
-- Go to next tab group (workspace root only)
-- Go to previous tab group (workspace root only)
-- Go to next tab group (workspace root + sidebars)
-- Go to previous tab group (workspace root + sidebars)
-- Go to next leaf in active tab group
-- Go to previous leaf in active tab group
-- Go to first leaf in workspace root
-- Go to last leaf in workspace root
-- Go to first leaf in active tab group
-- Go to last leaf in active tab group
-- Go to most recent leaf
-- Go to file explorer
+- Go to next tab group (workspace root only)  
+- Go to previous tab group (workspace root only)  
+- Go to next tab group (workspace root + sidebars)  
+- Go to previous tab group (workspace root + sidebars)  
+- Go to next leaf in active tab group  
+- Go to previous leaf in active tab group  
+- Go to first leaf in workspace root  
+- Go to last leaf in workspace root  
+- Go to first leaf in active tab group  
+- Go to last leaf in active tab group  
+- Go to most recent leaf  
 
 ### Troubleshooting
-• Not compatible with Outliner.MD plugin in its current form (0.1.5) as it seems to highjack tab focus when an outliner file is open. This prevents changing the focus of tabs or tab splits via the keyboard commands.
+• Not compatible with Outliner.MD plugin in its current form (0.1.5) as it seems to highjack tab focus when an outliner file is open. This prevents changing the focus of tabs or tab splits via the keyboard commands.  
+• This plugin works well with my “[Smooth Explorer](https://github.com/gasparschott/smooth-explorer/)” plugin, which allows you to use the arrow keys to navigate up and down the File Explorer, opening items as you go, but it is not required.

@@ -1,37 +1,26 @@
 'use strict';
 
 let obsidian = require('obsidian');
-let DEFAULT_SETTINGS = {
-	'keyboard_shortcuts': []
-};
 
 class SmoothNavigator extends obsidian.Plugin {
     async onload() {
 		// console.log('Loading the Smooth Navigator plugin.');
 		// await this.loadSettings();
 		const workspace = this.app.workspace;
-		const getAllTabGroups = (tab_group,action) => {																									// if tab_group !== null, get all tab groups
-			let root_split_tab_groups = workspace.rootSplit?.children || [];																			// get root split top level tab groups
-			let left_sidebar_tab_groups = ( /plus/i.test(action) && workspace.leftSplit.collapsed === false ? workspace.leftSplit?.children : [] );		// get left sidebar tab groups
-			let right_sidebar_tab_groups = ( /plus/i.test(action) && workspace.rightSplit.collapsed === false ? workspace.rightSplit?.children : [] );	// get right sidebar tab groups
-			let floating_window_tab_groups = ( /plus/i.test(action) && workspace.floatingSplit.children > 0 ? workspace.floatingSplit?.children : [] );	// get floating window tab groups
-			let all_tab_groups = [];
-			let nodes = ( tab_group !== null ? tab_group : root_split_tab_groups.concat(right_sidebar_tab_groups,left_sidebar_tab_groups,floating_window_tab_groups) );		// concat tab groups
-			if ( nodes[0] === undefined ) { return []; }
-			nodes.forEach( node => { if ( node.type === 'tabs' ) { all_tab_groups.push(node) } else { all_tab_groups = getTabGroupsRecursively(node,all_tab_groups) } });	// get nested tab groups
-			return ( /backward/i.test(action )? all_tab_groups.toReversed() : all_tab_groups );
-		}
-		const getTabGroupsRecursively = (begin_node,all_tab_groups) => {
-			let all_children = begin_node?.children;
-			if ( all_children === undefined ) { return }
-			all_tab_groups = all_tab_groups || [];
-			if ( begin_node.children ) {
-				begin_node.children.forEach(function(child) {
-					if (child.type === 'tabs') { all_tab_groups.push(child); }
-					all_children = all_children.concat(getTabGroupsRecursively(child,all_tab_groups));
-				});
-			}
-			return all_tab_groups;
+		const getAllTabGroups = (action) => {
+			let tab_groups = [];
+			this.app.workspace.iterateAllLeaves(
+				leaf => {
+					switch(true) {
+						case leaf.parent.type !== 'tabs':																		return;
+						case !/root/i.test(action):																						// get all tab groups
+						case (/root/i.test(action)) && leaf.getRoot() === workspace.rootSplit:											// get root tab groups only
+							tab_groups.push(leaf.parent);																		break;
+					} 
+				}
+			)
+			tab_groups = !/backward/i.test(action) ? tab_groups.reverse() : tab_groups;
+			return [...new Set(tab_groups)];
 		}
 		const getAllLeaves = (tab_groups) => {
 			let all_tabs = [];
@@ -41,8 +30,8 @@ class SmoothNavigator extends obsidian.Plugin {
 		const getActiveTabGroup = () =>			{ return workspace.activeTabGroup; }
 		const getActiveLeaf = (tab_group) =>	{ return tab_group.children?.find( child => child.tabHeaderEl.className.includes('active')) ?? getActiveTabGroup().children?.[0]; }
 		const getNextTabGroup = (action) => {
-			let all_tab_groups = getAllTabGroups(null,action);
-			let active_tab_group = workspace.activeTabGroup, active_tab_group_index = all_tab_groups.indexOf(active_tab_group), next_tab_group;
+			let all_tab_groups = getAllTabGroups(action);
+			let active_tab_group = workspace.activeTabGroup, active_tab_group_index = all_tab_groups?.indexOf(active_tab_group), next_tab_group;
 			next_tab_group = all_tab_groups[active_tab_group_index + 1] || all_tab_groups[0];
 			return next_tab_group;
 		}
@@ -54,7 +43,7 @@ class SmoothNavigator extends obsidian.Plugin {
 		}
 		// FOCUS TABS
 		const goTo = (action) => {
-			let tab_groups = getAllTabGroups(null,action), active_tab_group = getActiveTabGroup(), target_leaf;
+			let tab_groups = getAllTabGroups(action), active_tab_group = getActiveTabGroup(), target_leaf;
 			switch(true) {
 				case action === 'cycleSplitsBackward' || action === 'cycleSplitsForward':			target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
 				case action === 'cycleSplitsBackwardPlus' || action === 'cycleSplitsForwardPlus':	target_leaf = getActiveLeaf(getNextTabGroup(action));							break;
@@ -65,7 +54,7 @@ class SmoothNavigator extends obsidian.Plugin {
 				case action === 'goToFirstRootLeaf':												target_leaf = getAllLeaves(tab_groups)[0];										break;
 				case action === 'goToLastRootLeaf':													target_leaf = getAllLeaves(tab_groups)[getAllLeaves(tab_groups).length - 1];	break;
 				case action === 'goToMostRecentLeaf':												target_leaf = workspace.getMostRecentLeaf();									break;
-//				case action === 'goToFileExplorer':													this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
+				// case action === 'goToFileExplorer':													this.app.commands.executeCommandById('file-explorer:reveal-active-file');		return;
 			}
 			workspace.setActiveLeaf(target_leaf,{focus:true});
 			if ( workspace.app.plugins.enabledPlugins.values().find( (value) => value === 'continuous-mode') ) {
@@ -131,16 +120,16 @@ class SmoothNavigator extends obsidian.Plugin {
 	} 
     // end onload
     // on plugin unload
-	onunload() {
+	// onunload() {
 		// console.log('Unloading the File Explorer Navigation plugin.');
-    }
+    // }
 	// load settings
-    async loadSettings() {
+    // async loadSettings() {
 		// this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
-    }
+    // }
     // save settings
-    async saveSettings() {
+    // async saveSettings() {
 		// await this.saveData(this.settings);
-    }
+    // }
 }
 module.exports = SmoothNavigator;
